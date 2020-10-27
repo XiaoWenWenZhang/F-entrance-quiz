@@ -11,7 +11,8 @@ class Group extends React.Component {
     };
   }
 
-  handleOnClick = () => {
+  handleOnClick = (event) => {
+    event.preventDefault();
     this.handleGroup();
   };
 

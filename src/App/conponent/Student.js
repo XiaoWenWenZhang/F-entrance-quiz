@@ -46,8 +46,10 @@ class Student extends React.Component {
       name: this.state.currentStudentName,
     };
 
-    const { studentsTemp } = this.state.students;
-    const { count } = this.state.idCount;
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    const studentsTemp = this.state.students;
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    const count = this.state.idCount;
     studentsTemp.unshift(currentStudent);
     this.setState({
       students: studentsTemp,
@@ -58,18 +60,20 @@ class Student extends React.Component {
   };
 
   render = () => {
-    const { students } = this.state.students;
+    const { students } = this.state;
 
     return (
       <div className="students w">
-        <h1>学员列表</h1>
-        {students.map((student) => (
-          <span className="student">
-            {student.id}
-            {'.'}
-            {student.name}
-          </span>
-        ))}
+        <h2>学员列表</h2>
+        <div className="student-list">
+          {students.map((student) => (
+            <span className="student">
+              {student.id}
+              {'.'}
+              {student.name}
+            </span>
+          ))}
+        </div>
         <Input
           type="text"
           placeholder="请输入学员名称"
