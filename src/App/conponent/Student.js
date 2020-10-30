@@ -5,7 +5,7 @@ import '../App.scss';
 class Student extends React.Component {
   constructor(props) {
     super(props);
-
+    // TODO GTB-知识点: - 数据解构设计不合理，前后端数据交互没有想清楚
     this.state = {
       students: [],
       currentStudent: {
@@ -39,6 +39,7 @@ class Student extends React.Component {
     }
   };
 
+  // TODO GTB-知识点: - students应该从后端API去获取，既然添加学员都是添加到后端的，学员数据就不应该在前端处理
   handleOnClick = (event) => {
     event.preventDefault();
     const currentStudent = {
@@ -46,9 +47,9 @@ class Student extends React.Component {
       name: this.state.currentStudentName,
     };
 
+    // TODO GTB-工程实践: - 没有删除无效注释
     // eslint-disable-next-line react/no-access-state-in-setstate
     const studentsTemp = this.state.students;
-    // eslint-disable-next-line react/no-access-state-in-setstate
     const count = this.state.idCount;
     studentsTemp.unshift(currentStudent);
     this.setState({

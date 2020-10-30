@@ -7,6 +7,7 @@ class App extends Component {
   render() {
     return (
       <div data-testid="app" className="App">
+        {/* TODO GTB-知识点： 第一层组件划分合理 */}
         <Group />
         <Student />
       </div>
@@ -15,3 +16,4 @@ class App extends Component {
 }
 
 export default App;
+// TODO GTB-工程实践: - 没有小步提交，commit信息不可读
