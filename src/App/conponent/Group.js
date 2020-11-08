@@ -1,13 +1,15 @@
 import React from 'react';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import '../App.scss';
+import '../../style/Group.css';
+import GroupItem from './GroupItem';
 
 class Group extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      groups: {},
+      groups: [],
     };
   }
 
@@ -20,7 +22,7 @@ class Group extends React.Component {
   handleGroup = async () => {
     // TODO GTB-工程实践: - 建议把数据请求提取到单独的service, URL 提取常量
     try {
-      await fetch('http://localhost:8080/get-groups', {
+      await fetch('http://localhost:8080/groups', {
         method: 'GET',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
@@ -42,14 +44,23 @@ class Group extends React.Component {
 
   render = () => {
     // TODO GTB-知识点: + 正确使用解构语法
-    const { groups } = this.state.groups;
     return (
       // TODO GTB-知识点: - css class 命名不规范，w是什么意思
-      <div className="group w">
-        <h2>分组列表</h2>
-        <Button type="primary" onClick={this.handleOnClick}>
-          分组学员{groups}
-        </Button>
+      <div className="group-part">
+        <div className="group-header">
+          <h2 className="group-header-title">分组列表</h2>
+          <button type="button" onClick={this.handleOnClick} className="group-button">
+            分组学员
+          </button>
+        </div>
+        <div className="group-main">
+          {this.state.groups.map((group) => (
+            <span className="group-items">
+              <header className="group-name">{group.name}</header>
+              <GroupItem students={group.students} />
+            </span>
+          ))}
+        </div>
       </div>
     );
   };

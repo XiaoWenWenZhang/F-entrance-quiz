@@ -1,0 +1,25 @@
+@import './_variables.scss';
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.group-button {
+  background-color: #ea5455;
+  color: #fff;
+  border: none;
+  padding: 5px 25px;
+  outline: none;
+}
+
+.group-name {
+  line-height: 30px;
+  height: 30px;
+  color: #fff;
+  text-align: center;
+  background-color: #929baa;
+  font-size: 12px;
+}

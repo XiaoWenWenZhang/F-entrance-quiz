@@ -6,10 +6,12 @@ import Student from './conponent/Student';
 class App extends Component {
   render() {
     return (
-      <div data-testid="app" className="App">
+      <div data-testid="app" className="App ">
+        <div className="page-heart">
+          <Group />
+          <Student />
+        </div>
         {/* TODO GTB-知识点： 第一层组件划分合理 */}
-        <Group />
-        <Student />
       </div>
     );
   }

@@ -1,57 +1,19 @@
-@import '~antd/dist/antd.css';
+@import '../style/variables';
 
-.w {
-  width: 1200px;
+.App {
+  padding: 20px 0;
+  background-color: $bg-gray;
+  height: 2000px;
+}
+
+.page-heart {
+  width: 1000px;
   margin: 0 auto;
 }
 
-.group {
-  margin-top: 30px;
-  height: 50px;
-  background-color: aquamarine;
+h2 {
+  font-weight: 500;
 }
 
-.group h2 {
-  padding-left: 20px;
-  float: left;
-  line-height: 50px;
-  font-weight: 700;
-}
-
-.group Button {
-  float: right;
-  background-color: red;
-  border: 1px solid red;
-  width: 130px;
-  cursor: pointer;
-  margin-top: 9px;
-  color: white;
-}
-
-.students .student {
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  border: 1px solid red;
-  background-color: pink;
-  margin: 0 10px;
-  text-align: center;
-  padding: 0 2px;
-}
-
-.students Button {
-  border: 1px solid rgb(129, 127, 127);
-}
-
-.students h2 {
-  display: block;
-  padding-left: 20px;
-  line-height: 50px;
-  font-weight: 700;
-}
-
-.student-list {
-  margin-bottom: 10px;
-}
 // TODO GTB-知识点: - 颜色值应使用_varaiable里面的常量，方便统一修改
 // TODO GTB-工程实践: - CSS 尽量拆分到组件里面写

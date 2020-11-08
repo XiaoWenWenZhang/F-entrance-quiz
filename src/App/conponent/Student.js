@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, message, Input } from 'antd';
-import '../App.scss';
+import { message } from 'antd';
+import '../../style/Student.css';
 
 class Student extends React.Component {
   constructor(props) {
@@ -8,86 +8,99 @@ class Student extends React.Component {
     // TODO GTB-知识点: - 数据解构设计不合理，前后端数据交互没有想清楚
     this.state = {
       students: [],
-      currentStudent: {
-        id: null,
-        name: '',
-      },
-      currentStudentName: '芈月',
-      idCount: 1,
+      studentName: '+ 添加学员',
     };
   }
 
-  handleOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  componentDidMount = () => {
+    this.getStudents();
+  };
+
+  getStudents = async () => {
+    try {
+      await fetch('http://localhost:8080/students', {
+        method: 'GET',
+      })
+        .then((Response) => {
+          if (Response.status === 200) return Response.json();
+          Promise.reject();
+          return 0;
+        })
+        .then((jsonData) => {
+          this.setState({
+            students: jsonData,
+          });
+        });
+    } catch (e) {
+      message.error(e);
+    }
+  };
+
+  handleCommit = (e) => {
+    if (e.keyCode === 13) {
+      this.saveStudent();
+    }
   };
 
   saveStudent = async () => {
     try {
-      const response = await fetch('http://localhost:8080/add-stydent', {
+      await fetch('http://localhost:8080/students', {
         method: 'POST',
-        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.state.currentStudent),
-      });
-      if (response.status === '201') {
-        message.success('提交成功');
-      }
+        body: JSON.stringify(this.state.studentName),
+      })
+        .then(() =>
+          this.setState({
+            studentName: '',
+          })
+        )
+        .then(this.getStudents);
     } catch (e) {
       message.error('提交失败');
     }
   };
 
-  // TODO GTB-知识点: - students应该从后端API去获取，既然添加学员都是添加到后端的，学员数据就不应该在前端处理
-  handleOnClick = (event) => {
-    event.preventDefault();
-    const currentStudent = {
-      id: this.state.idCount,
-      name: this.state.currentStudentName,
-    };
-
-    // TODO GTB-工程实践: - 没有删除无效注释
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    const studentsTemp = this.state.students;
-    const count = this.state.idCount;
-    studentsTemp.unshift(currentStudent);
+  handleOnChange = (event) => {
     this.setState({
-      students: studentsTemp,
-      idCount: count + 1,
+      studentName: event.target.value,
     });
+  };
 
-    this.saveStudent(currentStudent);
+  // TODO GTB-知识点: - students应该从后端API去获取，既然添加学员都是添加到后端的，学员数据就不应该在前端处理
+  handleFocus = () => {
+    this.setState({
+      studentName: '',
+    });
+  };
+
+  handleBlur = () => {
+    this.setState({
+      studentName: '+ 添加学员',
+    });
   };
 
   render = () => {
     const { students } = this.state;
 
     return (
-      <div className="students w">
-        <h2>学员列表</h2>
-        <div className="student-list">
+      <div className="student">
+        <h2 className="student-header">学员列表</h2>
+        <div className="student-main">
           {students.map((student) => (
-            <span className="student">
-              {student.id}
-              {'.'}
-              {student.name}
+            <span className="student-item">
+              {student.id}. {student.name}
             </span>
           ))}
+          <input
+            className="student-item add-student"
+            onFocus={this.handleFocus}
+            name="studentName"
+            value={this.state.studentName}
+            onKeyUp={this.handleCommit}
+            onChange={this.handleOnChange}
+            onBlur={this.handleBlur}
+          />
         </div>
-        <Input
-          type="text"
-          placeholder="请输入学员名称"
-          value={this.state.currentStudentName}
-          onChange={this.handleOnChange}
-        />
-        <Button
-          type="primary"
-          disabled={!this.state.currentStudentName}
-          onClick={this.handleOnClick}
-        >
-          添加
-        </Button>
       </div>
     );
   };

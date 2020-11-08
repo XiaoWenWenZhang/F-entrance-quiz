@@ -1,0 +1,19 @@
+.group-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  background-color: #f7f7f7;
+  border: 1px solid #929baa;
+  padding: 0 25px;
+}
+
+.group-item > .student-item {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-right: 20px;
+  background-color: #eeeeee;
+}

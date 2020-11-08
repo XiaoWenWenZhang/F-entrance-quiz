@@ -1,0 +1,30 @@
+.student-header {
+  height: 60px;
+  line-height: 60px;
+}
+
+.student-main {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: center;
+
+  padding: 10px 20px;
+}
+
+.student-main > .student-item {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+
+  margin: 10px 10px;
+  background-color: #eeeeee;
+}
+
+.add-student {
+  border: 1px solid #393e46;
+  margin-right: 0 !important;
+  outline: none;
+}
